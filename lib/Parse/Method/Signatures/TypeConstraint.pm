@@ -49,8 +49,7 @@ sub find_registered_constraint {
                   "definition into a type library or a BEGIN block.\n"
                 if $type && $type->isa('MooseX::Types::UndefinedType');
         }
-        else {
-            my $meta  = Class::MOP::class_of($pkg) || Class::MOP::Class->initialize($pkg);
+        elsif ( my $meta  = Class::MOP::class_of($pkg) ) {
             my $func  = $meta->get_package_symbol('&' . $name);
             my $proto = prototype $func if $func;
 
